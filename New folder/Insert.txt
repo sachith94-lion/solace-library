@@ -1,0 +1,59 @@
+private void btn_UCreateMouseClicked(java.awt.event.MouseEvent evt) {                                         
+        
+        try {
+            
+            String cname=txt_name.getText();
+        String cidno=txt_idno.getText();
+        String caddress=txt_address.getText();
+        String ctelno=txt_telno.getText();
+        String cemail=txt_email.getText();
+        String cusername=txt_username.getText();
+        String cpassword=txt_password.getText();
+        //String Repassword=txt_repw.getText();
+        //String adminpw=txt_adminpw.getText();
+        String position=cmb_position.getSelectedItem().toString();
+        
+        String sha1=encryption.SHA1(cpassword);
+        String sha512=encryption.SHA512(sha1);
+        String md5=encryption.MD5(sha512);
+        
+       if(cname.isEmpty() || cidno.isEmpty() || caddress.isEmpty() || ctelno.isEmpty() || cemail.isEmpty() || cusername.isEmpty() || cpassword.isEmpty()){
+           
+           
+           JOptionPane.showMessageDialog(null,"Please complete the form corectly.");
+           
+      
+       }
+        
+        else{
+            
+           String sql="insert into users(IDNo,name,address,telno,email,username,password,position) values(?,?,?,?,?,?,?,?)";
+                
+                pst=con.prepareStatement(sql);
+                
+                pst.setString(1,cidno);
+                pst.setString(2,cname);
+                pst.setString(3,caddress);
+                pst.setString(4,ctelno);
+                pst.setString(5,cemail);
+                pst.setString(6,cusername);
+                pst.setString(7,md5);
+                pst.setString(8,position);
+                
+                pst.execute();
+                
+                JOptionPane.showMessageDialog(null,"User Account successfully created.");
+                
+                clear();
+                tableload();
+            
+
+            }
+        } catch (Exception e) {
+        }
+        
+        
+       
+       
+       
+    }  

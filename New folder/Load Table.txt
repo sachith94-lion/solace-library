@@ -1,0 +1,15 @@
+public void tableload(){
+        
+        try {
+            String selectq = "select username,address,email,IDNo,name,telno,position from users";
+            pst = con.prepareStatement(selectq);
+            rs=pst.executeQuery();
+            
+            table_users.setModel(DbUtils.resultSetToTableModel(rs));
+            
+            
+            
+            
+        } catch (Exception e) {
+        }
+    }

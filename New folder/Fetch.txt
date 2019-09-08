@@ -1,0 +1,41 @@
+public void getdetails(){
+        
+        try {
+            String unamee=lbl_username.getText();
+            
+            
+            String selectqq="select * from users where username='"+unamee+"'";
+            
+            
+            Statement st =con.createStatement();
+            rs= st.executeQuery(selectqq);
+            
+            while(rs.next()){
+                String Email=rs.getString("email");
+            lbl_email.setText(Email);
+            
+            String telno=rs.getString("telno");
+            lbl_telno.setText(telno);
+            
+            String name=rs.getString("name");
+            lbl_name.setText("<html>"+name+"</html>");
+            
+            String idno=rs.getString("IDNo");
+            lbl_idno.setText(idno);
+            
+            String address=rs.getString("address");
+            lbl_address.setText("<html>"+address+"</html>");
+            
+            
+            }
+        
+            
+            
+            
+                    
+                   
+        } catch (Exception e) {
+            
+            JOptionPane.showMessageDialog(null, e);
+        }
+    }

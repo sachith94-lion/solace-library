@@ -1,0 +1,33 @@
+private void btn_UdeleteMouseClicked(java.awt.event.MouseEvent evt) {                                         
+        
+        if(txt_name.getText().isEmpty() || txt_idno.getText().isEmpty() || txt_address.getText().isEmpty() || txt_telno.getText().isEmpty() || txt_email.getText().isEmpty() || txt_username.getText().isEmpty() || txt_password.getText().isEmpty()){
+            
+            JOptionPane.showMessageDialog(null,"<html>Please select your member ID from the table"
+                    + "\" or complete the form corectly.</html>");
+        }
+        else{
+            
+            int x = JOptionPane.showConfirmDialog(null,"Do you want to delete this");
+        
+        if(x==0){
+            
+            String id = txt_idno.getText();
+            
+            try {
+                String deleteq="delete from users where IDNo='"+id+"'";
+                pst = con.prepareStatement(deleteq);
+                pst.execute();
+                //load table
+                tableload();
+                
+                clear();
+                
+                
+            } catch (Exception e) {
+            }
+            
+        }
+        }
+        
+        
+    }    

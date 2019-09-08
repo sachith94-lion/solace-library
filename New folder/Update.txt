@@ -1,0 +1,47 @@
+private void btn_UupdateMouseClicked(java.awt.event.MouseEvent evt) {                                         
+        
+        if(txt_name.getText().isEmpty() || txt_idno.getText().isEmpty() || txt_address.getText().isEmpty() || txt_telno.getText().isEmpty() || txt_email.getText().isEmpty() || txt_username.getText().isEmpty() || txt_password.getText().isEmpty()){
+            
+            JOptionPane.showMessageDialog(null,"<html>Please select your member ID from the table"
+                    + "\" or complete the form corectly.</html>");
+        }
+        
+        else{
+            
+            int x = JOptionPane.showConfirmDialog(null,"Do you really want to update");
+        
+        if(x==0){
+            String name=txt_name.getText();
+        String idno=txt_idno.getText();
+        String address=txt_address.getText();
+        String telno=txt_telno.getText();
+        String email=txt_email.getText();
+        String username=txt_username.getText();
+        String password=txt_password.getText();
+        
+        String position=cmb_position.getSelectedItem().toString();
+        
+        String sha1=encryption.SHA1(password);
+        String sha512=encryption.SHA512(sha1);
+        String md5=encryption.MD5(sha512);
+            
+            
+            try {
+                
+                String updateq="update users set username='"+username+"',password='"+md5+"',position='"+position+"',name='"+name+"',address='"+address+"',telno='"+telno+"',email='"+email+"' where IDNo='"+idno+"'";
+                pst = con.prepareStatement(updateq);
+                pst.execute();
+                //load table
+                tableload();
+                
+                clear();
+                
+            } catch (Exception e) {
+            }
+            
+        }
+        }
+        
+        
+        
+    }  
